@@ -18,17 +18,20 @@ last_year = today.year - 1
 month = today.month
 filename = f"noise_{last_year}_{month:02d}.xlsx"
 
-# 2. 다운로드 폴더 설정
-download_dir = os.path.abspath("downloads")
+# 2. 다운로드 폴더 절대경로로 하드코딩
+download_dir = "/home/ec2-user/Jeonse-ive-Script/downloads"
 os.makedirs(download_dir, exist_ok=True)
+
+# 3. 저장 파일명 경로
 final_path = os.path.join(download_dir, filename)
 
-# 3. 유니크한 user-data-dir 경로 생성 (중복 방지)
-user_data_dir = os.path.join(tempfile.gettempdir(), f"chrome-profile-{uuid.uuid4()}")
+# 3.2 user-data-dir도 절대경로로 고정 (충돌 방지용으로 UUID 추가)
+user_data_dir = f"/tmp/chrome-profile-{uuid.uuid4()}"
 
 # 4. 크롬 옵션 설정
 options = webdriver.ChromeOptions()
 options.add_argument(f"--user-data-dir={user_data_dir}")  # 충돌 방지
+options.add_argument("--headless")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 options.add_experimental_option("prefs", {
