@@ -1,11 +1,15 @@
+# -*- coding: utf-8 -*-
 import subprocess
+import os
 
-# 1. 다운로드 실행
-print("다운로드 시작...")
-subprocess.run(["python", "download.py"], check=True)
+base_path = os.path.dirname(os.path.abspath(__file__))
+download_script = os.path.join(base_path, "download.py")
+upload_script = os.path.join(base_path, "upload.py")
 
-# 2. 업로드 실행
-print("업로드 시작...")
-subprocess.run(["python", "upload.py"], check=True)
+print("📥 다운로드 시작...")
+subprocess.run(["python3", download_script], check=True)
 
-print("모든 작업 완료")
+print("📤 업로드 시작...")
+subprocess.run(["python3", upload_script], check=True)
+
+print("✅ 모든 작업 완료")
