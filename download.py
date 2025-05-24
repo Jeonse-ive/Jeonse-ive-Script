@@ -10,6 +10,9 @@ import os
 import time
 import shutil
 import tempfile 
+import uuid
+import glob
+
 
 # 날짜 계산
 today = datetime.today()
@@ -23,13 +26,14 @@ os.makedirs(download_dir, exist_ok=True)
 final_path = os.path.join(download_dir, filename)
 
 # 임시 user-data-dir 경로 생성
-user_data_dir = tempfile.mkdtemp()
+user_data_dir = os.path.join(tempfile.gettempdir(), f"chrome-profile-{uuid.uuid4()}")
 
-# 기존 크롬 옵션 설정
 options = webdriver.ChromeOptions()
 options.add_argument(f"--user-data-dir={user_data_dir}")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
 options.add_experimental_option("prefs", {
-    "download.default_directory": download_dir,
+    "download.default_directory": download_dir,  # download_dir은 기존대로 정의되어야 함
     "download.prompt_for_download": False,
     "directory_upgrade": True
 })
@@ -71,12 +75,6 @@ while True:
     if time.time() > timeout:
         raise TimeoutError("다운로드 타임아웃 발생")
     time.sleep(1)
-
-# 가장 최근에 다운로드된 .xlsx 파일 찾기
-downloaded_file = max(
-    [os.path.join(download_dir, f) for f in os.listdir(download_dir) if f.endswith(".xlsx")],
-    key=os.path.getctime
-)
 
 # 이름 변경 및 이동
 shutil.move(downloaded_file, final_path)
