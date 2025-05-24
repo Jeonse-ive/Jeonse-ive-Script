@@ -23,8 +23,8 @@ with open(file_path, 'rb') as f:
 
 # 결과 출력
 if response.status_code == 200:
-    print("✅ 업로드 성공!")
+    print("업로드 성공!")
 else:
-    print("❌ 업로드 실패!")
+    print("업로드 실패!")
     print(f"응답 코드: {response.status_code}")
     print(response.text)
