@@ -12,6 +12,7 @@ import shutil
 import tempfile 
 import uuid
 import glob
+import shutil
 
 
 # 날짜 계산
@@ -29,7 +30,6 @@ final_path = os.path.join(download_dir, filename)
 user_data_dir = os.path.join(tempfile.gettempdir(), f"chrome-profile-{uuid.uuid4()}")
 
 options = webdriver.ChromeOptions()
-options.add_argument(f"--user-data-dir={user_data_dir}")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 options.add_experimental_option("prefs", {
@@ -80,5 +80,6 @@ while True:
 shutil.move(downloaded_file, final_path)
 print(f"다운로드 완료: {final_path}")
 
+shutil.rmtree(user_data_dir, ignore_errors=True)
 # 브라우저 종료
 driver.quit()
