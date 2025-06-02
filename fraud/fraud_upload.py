@@ -17,6 +17,6 @@ with open(file_path, 'rb') as f:
 if response.status_code == 200:
     print("✅ Fraud 데이터 업로드 성공!")
 else:
-    print("❌ 업로드 실패!")
+    print("전세사기 업로드 실패!")
     print("응답 코드:", response.status_code)
     print(response.text)

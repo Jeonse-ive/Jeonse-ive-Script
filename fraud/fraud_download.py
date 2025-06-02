@@ -17,7 +17,7 @@ import glob
 today = datetime.today()
 
 # ▼ 다운로드 폴더 설정
-download_dir = os.path.abspath("downloads/fraud")
+download_dir = "/home/ec2-user/Jeonse-ive-Script/downloads/fraud"
 os.makedirs(download_dir, exist_ok=True)
 
 # ▼ 고유 Chrome 프로필 생성
@@ -26,6 +26,7 @@ user_data_dir = f"/tmp/chrome-profile-{uuid.uuid4()}"
 # ▼ Chrome 옵션 설정
 options = webdriver.ChromeOptions()
 options.add_argument(f"--user-data-dir={user_data_dir}")
+options.add_argument("--headless")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 options.add_experimental_option("prefs", {

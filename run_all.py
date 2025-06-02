@@ -28,6 +28,6 @@ print("▶️ fraud_convert 실행...")
 subprocess.run(["python3", fraud_convert_script], check=True)
 
 print("▶️ fraud_upload 실행...")
-subprocess.run(["python", fraud_upload_script], check=True)
+subprocess.run(["python3", fraud_upload_script], check=True)
 
 print("All tasks completed successfully.")
