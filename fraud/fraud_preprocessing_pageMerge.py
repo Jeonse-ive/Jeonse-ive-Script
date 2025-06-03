@@ -4,7 +4,7 @@ import re
 import pandas as pd
 
 # 1. 가장 최신 crime_data_YYYYMMDD.xlsx 파일 자동 탐색
-download_dir = "downloads/fraud"
+download_dir = "/home/ec2-user/Jeonse-ive-Script/downloads/fraud"
 xlsx_files = glob.glob(os.path.join(download_dir, "crime_data_*.xlsx"))
 
 def extract_date_from_filename(filename):
